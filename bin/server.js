@@ -88,7 +88,9 @@ function config() {
 /** "Documents/sitesnap" rather than "/Users/you/Documents/sitesnap". */
 function friendlyPath(abs) {
   const rel = path.relative(os.homedir(), abs);
-  return rel && !rel.startsWith('..') && !path.isAbsolute(rel) ? rel.split(path.sep).join(' / ') : abs;
+  if (rel && !rel.startsWith('..') && !path.isAbsolute(rel)) return rel.split(path.sep).join(' / ');
+  // Outside the home folder: the last two folders say enough.
+  return abs.split(path.sep).filter(Boolean).slice(-2).join(' / ') || abs;
 }
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|avif|svg|ico|bmp)$/i;

@@ -1,6 +1,6 @@
 /* tastemark · tokens · sitesnap
- * theme: custom "night chart" · deep navy paper, one warm ember accent,
- * automatic day variant · display Bricolage Grotesque · body Geist.
+ * theme: custom "day sky" · pale horizon paper, ink navy, one warm ember accent,
+ * automatic night variant · display Bricolage Grotesque · body Geist.
  * Fonts are served from this app (public/fonts), never a CDN: sitesnap is an
  * offline tool and must look right with the network unplugged.
  */
@@ -23,55 +23,70 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* ---- colour · night ------------------------------------------------- */
-  --color-paper: oklch(17% 0.032 268);
-  --color-paper-2: oklch(21.5% 0.036 268);
-  --color-paper-3: oklch(26% 0.04 268);
-  --color-paper-inset: oklch(14.5% 0.03 268);
+  /* ---- colour · day sky ----------------------------------------------
+   * Pale horizon paper, ink-navy type, one ember accent (the sun). Surfaces
+   * carry a faint blue so white cards still read as part of the sky.
+   */
+  --color-paper: oklch(95.5% 0.025 238);
+  --color-paper-2: oklch(99% 0.006 238);
+  --color-paper-3: oklch(93% 0.025 238);
+  --color-paper-inset: oklch(96.5% 0.015 238);
 
-  --color-ink: oklch(96% 0.01 262);
-  --color-ink-2: oklch(80% 0.022 264);
-  --color-ink-3: oklch(66% 0.026 264);
+  --color-ink: oklch(23% 0.065 258);
+  --color-ink-2: oklch(37% 0.055 258);
+  --color-ink-3: oklch(46% 0.05 258);
 
-  --color-accent: oklch(80% 0.125 52);
-  --color-accent-strong: oklch(85% 0.12 55);
-  --color-accent-ink: oklch(82% 0.115 54);
-  --color-accent-wash: oklch(80% 0.125 52 / 0.12);
-  --color-accent-line: oklch(80% 0.125 52 / 0.45);
-  --color-on-accent: oklch(22% 0.045 45);
+  /* 55% keeps white button text at 4.8:1. */
+  --color-accent: oklch(55% 0.155 42);
+  --color-accent-strong: oklch(50% 0.155 40);
+  --color-accent-ink: oklch(50% 0.15 42);
+  --color-accent-wash: oklch(62% 0.15 45 / 0.12);
+  --color-accent-line: oklch(58% 0.15 45 / 0.5);
+  --color-on-accent: oklch(99% 0.005 75);
 
-  --color-danger: oklch(74% 0.14 25);
-  --color-danger-wash: oklch(74% 0.14 25 / 0.12);
-  --color-focus: oklch(89% 0.1 60);
+  --color-danger: oklch(52% 0.17 27);
+  --color-danger-wash: oklch(52% 0.17 27 / 0.1);
+  --color-focus: oklch(42% 0.15 258);
 
-  --color-rule: oklch(31% 0.035 268);
-  --color-rule-strong: oklch(41% 0.04 268);
-  --color-glass: oklch(21.5% 0.036 268 / 0.72);
+  --color-rule: oklch(86% 0.02 238);
+  --color-rule-strong: oklch(74% 0.03 240);
+  --color-glass: oklch(99% 0.006 238 / 0.78);
 
-  --bloom-warm: oklch(72% 0.13 50 / 0.16);
-  --bloom-cool: oklch(55% 0.12 262 / 0.22);
+  --bloom-warm: oklch(80% 0.11 55 / 0.2);
+  --bloom-cool: oklch(80% 0.06 250 / 0.25);
 
   /* Behind dialogs, and the shadows that lift them. */
-  --color-scrim: oklch(10% 0.03 268 / 0.6);
-  --shadow-sheet: 0 30px 80px -30px oklch(5% 0.03 268 / 0.9);
-  --shadow-side: 20px 0 40px -20px oklch(5% 0.03 268 / 0.8);
+  --color-scrim: oklch(30% 0.05 258 / 0.4);
+  --shadow-sheet: 0 30px 80px -30px oklch(30% 0.06 258 / 0.5);
+  --shadow-side: 20px 0 40px -20px oklch(30% 0.06 258 / 0.35);
 
   /* What a browser paints under a web page that sets no background. The
    * viewer shows other people's sites, which are designed against it. */
   --color-frame-canvas: Canvas;
 
+  /* The sky itself. Read by public/sky.js as hex or rgb, never oklch. */
+  --sky-zenith: #7db4ee;
+  --sky-horizon: #dcecfb;
+  --sky-cloud: #fdfeff;
+  --sky-glow: rgba(255, 240, 208, 0.95);
+  /* What the page shows where the live sky is not running. */
+  --sky-fallback: linear-gradient(180deg, #a9cdf3 0%, #dcecfb 55%, #eef5fc 100%);
+  --sky-calm: linear-gradient(180deg, oklch(92% 0.04 238) 0%, var(--color-paper) 22rem);
+  /* A soft wash under type that sits on the moving sky. */
+  --sky-wash: oklch(99% 0.01 238 / 0.62);
+
   /* Map colours, read by public/map.js at draw time. */
-  --map-node: var(--color-accent);
-  --map-node-dim: oklch(80% 0.125 52 / 0.45);
-  --map-edge: oklch(75% 0.04 264 / 0.26);
-  --map-ring: oklch(75% 0.04 264 / 0.16);
-  --map-spark: oklch(92% 0.02 262);
-  --map-root: oklch(24% 0.04 268);
-  --map-track: oklch(75% 0.04 264 / 0.18);
-  --map-label: oklch(90% 0.015 262);
-  --map-glow: oklch(80% 0.125 52 / 0.5);
+  --map-node: oklch(58% 0.16 44);
+  --map-node-dim: oklch(58% 0.16 44 / 0.45);
+  --map-edge: oklch(40% 0.06 258 / 0.3);
+  --map-ring: oklch(40% 0.06 258 / 0.2);
+  --map-spark: oklch(35% 0.08 258);
+  --map-root: oklch(99% 0.006 238);
+  --map-track: oklch(40% 0.06 258 / 0.18);
+  --map-label: oklch(24% 0.06 258);
+  --map-glow: oklch(70% 0.14 50 / 0.4);
 
   /* ---- type ----------------------------------------------------------- */
   --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
@@ -101,7 +116,7 @@
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-pill: 999px;
-  --shadow-raise: 0 1px 0 oklch(100% 0 0 / 0.04) inset, 0 18px 40px -24px oklch(8% 0.03 268 / 0.9);
+  --shadow-raise: 0 1px 0 oklch(100% 0 0 / 0.8) inset, 0 18px 40px -26px oklch(40% 0.08 258 / 0.35);
 
   /* ---- motion ---------------------------------------------------------
    * Three easings, no overshoot. This is a progress surface: things arrive
@@ -116,54 +131,62 @@
   --dur-slow: 520ms;
 }
 
-/* ---- day ---------------------------------------------------------------
- * Follows the system setting. Same structure, warm paper, deeper ember so
- * text in the accent still clears 4.5:1.
+/* ---- night -------------------------------------------------------------
+ * Follows the system setting: the same sky after sunset. Deep navy paper,
+ * a dusk sky, and the ember accent lifted so it still clears 4.5:1.
  */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']) {
-    color-scheme: light;
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
 
-    --color-paper: oklch(96.5% 0.008 75);
-    --color-paper-2: oklch(98.6% 0.005 75);
-    --color-paper-3: oklch(93% 0.012 75);
-    --color-paper-inset: oklch(94% 0.011 75);
+    --color-paper: oklch(17% 0.032 268);
+    --color-paper-2: oklch(21.5% 0.036 268);
+    --color-paper-3: oklch(26% 0.04 268);
+    --color-paper-inset: oklch(14.5% 0.03 268);
 
-    --color-ink: oklch(22% 0.035 266);
-    --color-ink-2: oklch(38% 0.03 266);
-    --color-ink-3: oklch(48% 0.025 266);
+    --color-ink: oklch(96% 0.01 262);
+    --color-ink-2: oklch(80% 0.022 264);
+    --color-ink-3: oklch(66% 0.026 264);
 
-    /* 55% keeps white button text at 4.8:1. */
-    --color-accent: oklch(55% 0.155 42);
-    --color-accent-strong: oklch(50% 0.155 40);
-    --color-accent-ink: oklch(50% 0.15 42);
-    --color-accent-wash: oklch(62% 0.15 45 / 0.12);
-    --color-accent-line: oklch(58% 0.15 45 / 0.5);
-    --color-on-accent: oklch(99% 0.005 75);
+    --color-accent: oklch(80% 0.125 52);
+    --color-accent-strong: oklch(85% 0.12 55);
+    --color-accent-ink: oklch(82% 0.115 54);
+    --color-accent-wash: oklch(80% 0.125 52 / 0.12);
+    --color-accent-line: oklch(80% 0.125 52 / 0.45);
+    --color-on-accent: oklch(22% 0.045 45);
 
-    --color-danger: oklch(52% 0.17 27);
-    --color-danger-wash: oklch(52% 0.17 27 / 0.1);
-    --color-focus: oklch(52% 0.15 42);
+    --color-danger: oklch(74% 0.14 25);
+    --color-danger-wash: oklch(74% 0.14 25 / 0.12);
+    --color-focus: oklch(89% 0.1 60);
 
-    --color-rule: oklch(88% 0.012 75);
-    --color-rule-strong: oklch(78% 0.016 75);
-    --color-glass: oklch(98.6% 0.005 75 / 0.74);
+    --color-rule: oklch(31% 0.035 268);
+    --color-rule-strong: oklch(41% 0.04 268);
+    --color-glass: oklch(21.5% 0.036 268 / 0.72);
 
-    --bloom-warm: oklch(80% 0.11 55 / 0.28);
-    --bloom-cool: oklch(80% 0.06 262 / 0.3);
-    --shadow-raise: 0 1px 0 oklch(100% 0 0 / 0.7) inset, 0 18px 40px -26px oklch(40% 0.04 266 / 0.35);
-    --color-scrim: oklch(30% 0.03 266 / 0.35);
-    --shadow-sheet: 0 30px 80px -30px oklch(30% 0.04 266 / 0.45);
-    --shadow-side: 20px 0 40px -20px oklch(30% 0.04 266 / 0.35);
+    --bloom-warm: oklch(72% 0.13 50 / 0.16);
+    --bloom-cool: oklch(55% 0.12 262 / 0.22);
 
-    --map-node: oklch(62% 0.15 45);
-    --map-node-dim: oklch(62% 0.15 45 / 0.45);
-    --map-edge: oklch(45% 0.03 266 / 0.28);
-    --map-ring: oklch(45% 0.03 266 / 0.18);
-    --map-spark: oklch(40% 0.04 266);
-    --map-root: oklch(99% 0.004 75);
-    --map-track: oklch(45% 0.03 266 / 0.18);
-    --map-label: oklch(25% 0.035 266);
-    --map-glow: oklch(70% 0.14 50 / 0.45);
+    --color-scrim: oklch(10% 0.03 268 / 0.6);
+    --shadow-sheet: 0 30px 80px -30px oklch(5% 0.03 268 / 0.9);
+    --shadow-side: 20px 0 40px -20px oklch(5% 0.03 268 / 0.8);
+    --shadow-raise: 0 1px 0 oklch(100% 0 0 / 0.04) inset, 0 18px 40px -24px oklch(8% 0.03 268 / 0.9);
+
+    --sky-zenith: #0a1330;
+    --sky-horizon: #263a66;
+    --sky-cloud: #6f86b8;
+    --sky-glow: rgba(255, 170, 110, 0.4);
+    --sky-fallback: linear-gradient(180deg, #0a1330 0%, #263a66 100%);
+    --sky-calm: linear-gradient(180deg, oklch(21% 0.04 268) 0%, var(--color-paper) 22rem);
+    --sky-wash: oklch(14% 0.04 268 / 0.5);
+
+    --map-node: var(--color-accent);
+    --map-node-dim: oklch(80% 0.125 52 / 0.45);
+    --map-edge: oklch(75% 0.04 264 / 0.26);
+    --map-ring: oklch(75% 0.04 264 / 0.16);
+    --map-spark: oklch(92% 0.02 262);
+    --map-root: oklch(24% 0.04 268);
+    --map-track: oklch(75% 0.04 264 / 0.18);
+    --map-label: oklch(90% 0.015 262);
+    --map-glow: oklch(80% 0.125 52 / 0.5);
   }
 }

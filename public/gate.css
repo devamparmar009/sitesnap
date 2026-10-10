@@ -1,7 +1,8 @@
 /* tastemark · extension of sitesnap · macrostructure: single-column gate (component scope)
  * genre: modern-minimal · theme: night chart (tokens.css, unchanged) · dials V3 M3 D2
  * nav: none · footer: none · signature: none (one load reveal) · sources: hand-written
- * critique: P4 H4 E4 S4 R5 V3 */
+ * critique: P4 H4 E4 S4 R5 V3
+ * sky: Originkit Cloud Sky, ported in sky.js, drawn behind the form */
 
 *,
 *::before,
@@ -21,7 +22,7 @@ body {
   display: grid;
   place-items: center;
   padding: var(--space-xl) var(--space-md);
-  background: var(--color-paper);
+  background: transparent;
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -56,6 +57,7 @@ body {
   font-size: var(--text-md);
   letter-spacing: -0.01em;
   color: var(--color-ink);
+  text-decoration: none;
 }
 
 .gate__mark {
@@ -196,3 +198,36 @@ body {
     transition: none;
   }
 }
+
+/* The sky behind the form (see sky.js). The CSS gradient is what shows
+ * if WebGL is missing. */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--sky-fallback);
+}
+
+.sky canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gate {
+  position: relative;
+  isolation: isolate;
+}
+
+/* A soft paper wash under the type so it stays readable on any cloud. */
+.gate::before {
+  content: '';
+  position: absolute;
+  inset: -3rem -2.5rem;
+  z-index: -1;
+  background: radial-gradient(closest-side, var(--sky-wash), transparent);
+  pointer-events: none;
+}
+

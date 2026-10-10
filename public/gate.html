@@ -13,7 +13,8 @@
     <link rel="icon" href="favicon.ico" sizes="48x48" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   </head>
-  <body>
+  <body data-always-sky>
+    <div class="sky" id="sky" aria-hidden="true"><canvas id="sky-canvas"></canvas></div>
     <main class="gate">
       <a class="gate__brand" href="/" aria-label="sitesnap">
         <svg class="gate__mark" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M26.00 128.00a102.0 102.0 0 1 1 204.0 0a102.0 102.0 0 1 1 -204.0 0zM54.00 128.00a74.0 74.0 0 1 0 148.0 0a74.0 74.0 0 1 0 -148.0 0z M164.41 71.43a31 31 0 1 1 62 0a31 31 0 1 1 -62 0zM94.00 128.00a34 34 0 1 1 68 0a34 34 0 1 1 -68 0z" /></svg>
@@ -40,6 +41,7 @@
       </section>
     </main>
 
+    <script src="sky.js"></script>
     <script>
       (function () {
         var form = document.getElementById('gate-form');
