@@ -231,3 +231,17 @@ body {
   pointer-events: none;
 }
 
+
+/* Liquid glass, same recipe as the app (see app.css). */
+.gate__input {
+  background-color: var(--color-paper-inset);
+  background-image: var(--glass-sheen);
+  border-color: var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+
+.gate__button {
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.35), 0 10px 22px -10px oklch(42% 0.17 255 / 0.65);
+}

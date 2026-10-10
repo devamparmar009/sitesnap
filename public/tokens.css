@@ -1,5 +1,5 @@
 /* tastemark · tokens · sitesnap
- * theme: custom "day sky" · pale horizon paper, ink navy, one warm ember accent,
+ * theme: custom "day sky" · pale horizon, ink navy, one sky-blue accent, liquid glass surfaces,
  * automatic night variant · display Bricolage Grotesque · body Geist.
  * Fonts are served from this app (public/fonts), never a CDN: sitesnap is an
  * offline tool and must look right with the network unplugged.
@@ -30,31 +30,31 @@
    * carry a faint blue so white cards still read as part of the sky.
    */
   --color-paper: oklch(95.5% 0.025 238);
-  --color-paper-2: oklch(99% 0.006 238);
-  --color-paper-3: oklch(93% 0.025 238);
-  --color-paper-inset: oklch(96.5% 0.015 238);
+  --color-paper-2: oklch(100% 0 0 / 0.5);
+  --color-paper-3: oklch(55% 0.1 250 / 0.13);
+  --color-paper-inset: oklch(100% 0 0 / 0.4);
 
   --color-ink: oklch(23% 0.065 258);
   --color-ink-2: oklch(37% 0.055 258);
   --color-ink-3: oklch(46% 0.05 258);
 
   /* 55% keeps white button text at 4.8:1. */
-  --color-accent: oklch(55% 0.155 42);
-  --color-accent-strong: oklch(50% 0.155 40);
-  --color-accent-ink: oklch(50% 0.15 42);
-  --color-accent-wash: oklch(62% 0.15 45 / 0.12);
-  --color-accent-line: oklch(58% 0.15 45 / 0.5);
-  --color-on-accent: oklch(99% 0.005 75);
+  --color-accent: oklch(52% 0.17 255);
+  --color-accent-strong: oklch(46% 0.17 258);
+  --color-accent-ink: oklch(45% 0.16 258);
+  --color-accent-wash: oklch(55% 0.17 255 / 0.12);
+  --color-accent-line: oklch(52% 0.17 255 / 0.5);
+  --color-on-accent: oklch(99% 0.005 240);
 
   --color-danger: oklch(52% 0.17 27);
   --color-danger-wash: oklch(52% 0.17 27 / 0.1);
-  --color-focus: oklch(42% 0.15 258);
+  --color-focus: oklch(28% 0.1 262);
 
-  --color-rule: oklch(86% 0.02 238);
-  --color-rule-strong: oklch(74% 0.03 240);
-  --color-glass: oklch(99% 0.006 238 / 0.78);
+  --color-rule: oklch(100% 0 0 / 0.6);
+  --color-rule-strong: oklch(100% 0 0 / 0.85);
+  --color-glass: oklch(100% 0 0 / 0.46);
 
-  --bloom-warm: oklch(80% 0.11 55 / 0.2);
+  --bloom-warm: oklch(80% 0.08 235 / 0.2);
   --bloom-cool: oklch(80% 0.06 250 / 0.25);
 
   /* Behind dialogs, and the shadows that lift them. */
@@ -66,27 +66,33 @@
    * viewer shows other people's sites, which are designed against it. */
   --color-frame-canvas: Canvas;
 
+  /* Liquid glass: a pale fill, a bright edge, a lit top rim, a soft drop. */
+  --glass-blur: blur(16px) saturate(165%);
+  --glass-sheen: linear-gradient(135deg, oklch(100% 0 0 / 0.5), oklch(100% 0 0 / 0) 46%);
+  --glass-edge: oklch(100% 0 0 / 0.7);
+  --glass-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.9), inset 0 -1px 0 oklch(100% 0 0 / 0.25), 0 14px 32px -14px oklch(42% 0.12 255 / 0.4);
+
   /* The sky itself. Read by public/sky.js as hex or rgb, never oklch. */
   --sky-zenith: #7db4ee;
   --sky-horizon: #dcecfb;
   --sky-cloud: #fdfeff;
-  --sky-glow: rgba(255, 240, 208, 0.95);
+  --sky-glow: rgba(228, 246, 255, 0.95);
   /* What the page shows where the live sky is not running. */
   --sky-fallback: linear-gradient(180deg, #a9cdf3 0%, #dcecfb 55%, #eef5fc 100%);
   --sky-calm: linear-gradient(180deg, oklch(92% 0.04 238) 0%, var(--color-paper) 22rem);
   /* A soft wash under type that sits on the moving sky. */
-  --sky-wash: oklch(99% 0.01 238 / 0.62);
+  --sky-wash: oklch(100% 0 0 / 0.5);
 
   /* Map colours, read by public/map.js at draw time. */
-  --map-node: oklch(58% 0.16 44);
-  --map-node-dim: oklch(58% 0.16 44 / 0.45);
+  --map-node: oklch(52% 0.17 255);
+  --map-node-dim: oklch(52% 0.17 255 / 0.45);
   --map-edge: oklch(40% 0.06 258 / 0.3);
   --map-ring: oklch(40% 0.06 258 / 0.2);
   --map-spark: oklch(35% 0.08 258);
-  --map-root: oklch(99% 0.006 238);
+  --map-root: oklch(100% 0 0 / 0.9);
   --map-track: oklch(40% 0.06 258 / 0.18);
   --map-label: oklch(24% 0.06 258);
-  --map-glow: oklch(70% 0.14 50 / 0.4);
+  --map-glow: oklch(62% 0.16 250 / 0.4);
 
   /* ---- type ----------------------------------------------------------- */
   --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
@@ -116,7 +122,7 @@
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-pill: 999px;
-  --shadow-raise: 0 1px 0 oklch(100% 0 0 / 0.8) inset, 0 18px 40px -26px oklch(40% 0.08 258 / 0.35);
+  --shadow-raise: var(--glass-shadow);
 
   /* ---- motion ---------------------------------------------------------
    * Three easings, no overshoot. This is a progress surface: things arrive
@@ -140,28 +146,28 @@
     color-scheme: dark;
 
     --color-paper: oklch(17% 0.032 268);
-    --color-paper-2: oklch(21.5% 0.036 268);
-    --color-paper-3: oklch(26% 0.04 268);
-    --color-paper-inset: oklch(14.5% 0.03 268);
+    --color-paper-2: oklch(30% 0.05 268 / 0.5);
+    --color-paper-3: oklch(80% 0.08 240 / 0.14);
+    --color-paper-inset: oklch(18% 0.04 268 / 0.5);
 
     --color-ink: oklch(96% 0.01 262);
     --color-ink-2: oklch(80% 0.022 264);
     --color-ink-3: oklch(66% 0.026 264);
 
-    --color-accent: oklch(80% 0.125 52);
-    --color-accent-strong: oklch(85% 0.12 55);
-    --color-accent-ink: oklch(82% 0.115 54);
-    --color-accent-wash: oklch(80% 0.125 52 / 0.12);
-    --color-accent-line: oklch(80% 0.125 52 / 0.45);
-    --color-on-accent: oklch(22% 0.045 45);
+    --color-accent: oklch(80% 0.1 235);
+    --color-accent-strong: oklch(86% 0.09 235);
+    --color-accent-ink: oklch(84% 0.09 235);
+    --color-accent-wash: oklch(80% 0.1 235 / 0.14);
+    --color-accent-line: oklch(80% 0.1 235 / 0.5);
+    --color-on-accent: oklch(20% 0.05 258);
 
     --color-danger: oklch(74% 0.14 25);
     --color-danger-wash: oklch(74% 0.14 25 / 0.12);
-    --color-focus: oklch(89% 0.1 60);
+    --color-focus: oklch(92% 0.06 235);
 
-    --color-rule: oklch(31% 0.035 268);
-    --color-rule-strong: oklch(41% 0.04 268);
-    --color-glass: oklch(21.5% 0.036 268 / 0.72);
+    --color-rule: oklch(100% 0 0 / 0.14);
+    --color-rule-strong: oklch(100% 0 0 / 0.26);
+    --color-glass: oklch(26% 0.05 268 / 0.5);
 
     --bloom-warm: oklch(72% 0.13 50 / 0.16);
     --bloom-cool: oklch(55% 0.12 262 / 0.22);
@@ -169,22 +175,25 @@
     --color-scrim: oklch(10% 0.03 268 / 0.6);
     --shadow-sheet: 0 30px 80px -30px oklch(5% 0.03 268 / 0.9);
     --shadow-side: 20px 0 40px -20px oklch(5% 0.03 268 / 0.8);
-    --shadow-raise: 0 1px 0 oklch(100% 0 0 / 0.04) inset, 0 18px 40px -24px oklch(8% 0.03 268 / 0.9);
+    --shadow-raise: var(--glass-shadow);
 
     --sky-zenith: #0a1330;
     --sky-horizon: #263a66;
     --sky-cloud: #6f86b8;
-    --sky-glow: rgba(255, 170, 110, 0.4);
+    --sky-glow: rgba(140, 190, 255, 0.35);
     --sky-fallback: linear-gradient(180deg, #0a1330 0%, #263a66 100%);
     --sky-calm: linear-gradient(180deg, oklch(21% 0.04 268) 0%, var(--color-paper) 22rem);
     --sky-wash: oklch(14% 0.04 268 / 0.5);
+    --glass-sheen: linear-gradient(135deg, oklch(100% 0 0 / 0.1), oklch(100% 0 0 / 0) 46%);
+    --glass-edge: oklch(100% 0 0 / 0.2);
+    --glass-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.16), 0 16px 34px -16px oklch(5% 0.04 268 / 0.8);
 
     --map-node: var(--color-accent);
     --map-node-dim: oklch(80% 0.125 52 / 0.45);
     --map-edge: oklch(75% 0.04 264 / 0.26);
     --map-ring: oklch(75% 0.04 264 / 0.16);
     --map-spark: oklch(92% 0.02 262);
-    --map-root: oklch(24% 0.04 268);
+    --map-root: oklch(30% 0.05 268 / 0.9);
     --map-track: oklch(75% 0.04 264 / 0.18);
     --map-label: oklch(90% 0.015 262);
     --map-glow: oklch(80% 0.125 52 / 0.5);

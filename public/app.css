@@ -1,4 +1,4 @@
-/* tastemark · macrostructure: Map / Diagram (start screen: open sky, headline left) · genre: atmospheric · theme: custom day sky (pale horizon paper, ink navy, one ember accent, automatic night variant) · dials V6 M7 D4 · nav: plain full-width bar · footer: Ft5 statement · signature: Cloud Sky (Originkit, ported to vanilla WebGL) behind the start screen, plus the live site map while saving · sources: Originkit cloud-sky; hand-built vanilla · critique: P4 H4 E4 S4 R4 V4 */
+/* tastemark · macrostructure: Map / Diagram (start screen: open sky, headline left) · genre: atmospheric · theme: custom day sky (pale horizon paper, ink navy, one sky-blue accent, liquid glass surfaces, automatic night variant) · dials V6 M7 D4 · nav: plain full-width bar · footer: Ft5 statement · signature: Cloud Sky (Originkit, ported to vanilla WebGL) behind the start screen, plus the live site map while saving · sources: Originkit cloud-sky; hand-built vanilla · critique: P4 H4 E4 S4 R4 V4 */
 
 /* ---- base ---------------------------------------------------------------- */
 
@@ -877,7 +877,7 @@ main:focus {
 
 .tile input:checked {
   border-color: var(--color-accent);
-  box-shadow: inset 0 0 0 4px var(--color-paper-2), inset 0 0 0 10px var(--color-accent);
+  box-shadow: inset 0 0 0 4px oklch(100% 0 0), inset 0 0 0 10px var(--color-accent);
 }
 
 .tile:has(input:checked) {
@@ -2077,4 +2077,69 @@ main:focus {
   .sky {
     transition: none;
   }
+}
+
+
+/* ---- liquid glass -------------------------------------------------------------
+ * One recipe for every surface that sits on the sky: a pale translucent fill,
+ * the sky blurred and saturated behind it, a bright edge, a lit top rim and a
+ * soft sheen across the top-left corner. Buttons that carry the one action
+ * stay solid so the eye knows where to go.
+ */
+.nav,
+.site,
+.notice,
+.tile,
+.segment,
+.more,
+.address__row,
+.tally,
+.snap,
+.map,
+.empty,
+.btn:not(.btn--primary):not(.btn--quiet):not(.btn--danger),
+.field input,
+.field select,
+.viewer__bar,
+.sheet,
+.map__tip,
+.toast {
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-color: var(--glass-edge);
+}
+
+.site,
+.notice,
+.tile,
+.segment,
+.more,
+.address__row,
+.tally,
+.snap,
+.map,
+.sheet {
+  background-image: var(--glass-sheen);
+  box-shadow: var(--glass-shadow);
+}
+
+.nav {
+  border-bottom-color: var(--glass-edge);
+  box-shadow: inset 0 -1px 0 oklch(100% 0 0 / 0.25), 0 10px 30px -18px oklch(42% 0.12 255 / 0.35);
+}
+
+.btn:not(.btn--primary):not(.btn--quiet):not(.btn--danger) {
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.8), 0 6px 14px -8px oklch(42% 0.12 255 / 0.35);
+}
+
+.btn--primary {
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.35), 0 10px 22px -10px oklch(42% 0.17 255 / 0.65);
+}
+
+.address__row:focus-within {
+  border-color: var(--color-accent);
+}
+
+.map {
+  background-color: var(--color-paper-2);
 }
