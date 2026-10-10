@@ -1,0 +1,40 @@
+{
+  "name": "sitesnap",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Download a complete website for offline viewing \u2014 pure Node, no shell, no wget.",
+  "type": "commonjs",
+  "bin": {
+    "sitesnap": "./bin/cli.js"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "start": "node ./bin/server.js",
+    "app": "node ./bin/app.js",
+    "build:app": "node ./scripts/build-app.mjs",
+    "cli": "node ./bin/cli.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "cheerio": "^1.0.0",
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  },
+  "//playwright": "--render needs Playwright: npm install playwright && npx playwright install chromium. Declared as an OPTIONAL PEER rather than an optionalDependency, because npm silently skips a failed optionalDependency and then reports the tree as up to date \u2014 leaving a broken feature and no error to explain it.",
+  "peerDependencies": {
+    "playwright": ">=1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

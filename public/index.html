@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Save any website to your computer so it opens without the internet." />
+    <title>sitesnap</title>
+    <link rel="preload" href="fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  </head>
+  <body data-route="save" data-view="start">
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- N5 floating pill -->
+    <header class="nav">
+      <a class="nav__brand" href="#/" aria-label="sitesnap, save a site">
+        <svg class="nav__mark" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M26.00 128.00a102.0 102.0 0 1 1 204.0 0a102.0 102.0 0 1 1 -204.0 0zM54.00 128.00a74.0 74.0 0 1 0 148.0 0a74.0 74.0 0 1 0 -148.0 0z M164.41 71.43a31 31 0 1 1 62 0a31 31 0 1 1 -62 0zM94.00 128.00a34 34 0 1 1 68 0a34 34 0 1 1 -68 0z" /></svg>
+        <span>sitesnap</span>
+      </a>
+      <nav class="nav__links" aria-label="Main">
+        <a href="#/" data-link="save">Save a site</a>
+        <a href="#/library" data-link="library">Your library <span class="nav__count" id="library-count" hidden></span></a>
+      </nav>
+      <span class="nav__status" id="conn" data-live="false" role="status">
+        <span class="nav__dot" aria-hidden="true"></span>
+        <span id="conn-text">Connecting</span>
+      </span>
+      <button class="nav__quit" id="quit" type="button" hidden>Quit</button>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- ============ SAVE ============ -->
+      <section class="studio" id="studio" aria-labelledby="studio-title">
+        <div class="panel" id="panel">
+          <!-- start + check -->
+          <div class="pane" data-pane="start">
+            <h1 class="display" id="studio-title">Save any website to your computer.</h1>
+            <p class="lede">
+              Paste an address. sitesnap copies its pages, pictures and fonts so it opens without
+              the internet.
+            </p>
+
+            <form class="address" id="address-form" autocomplete="off" novalidate>
+              <label class="address__label" for="address">Website address</label>
+              <div class="address__row">
+                <input
+                  class="address__input"
+                  id="address"
+                  name="address"
+                  type="text"
+                  inputmode="url"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  placeholder="example.com"
+                  aria-describedby="address-hint"
+                  required
+                />
+                <button class="btn btn--primary" id="lookup" type="submit">
+                  <span class="btn__label">Look it up</span>
+                </button>
+              </div>
+              <p class="address__hint" id="address-hint">Tip: copy it from the bar at the top of your browser.</p>
+            </form>
+
+            <div class="check-error" id="check-error" hidden>
+              <h2 class="check-error__title" id="check-error-title"></h2>
+              <p class="check-error__text" id="check-error-text"></p>
+              <div class="row">
+                <button class="btn btn--primary" id="check-error-action" type="button" hidden></button>
+              </div>
+              <details class="tech">
+                <summary>Technical details</summary>
+                <p id="check-error-detail"></p>
+              </details>
+            </div>
+
+            <div class="plan" id="plan" hidden>
+              <article class="site" id="site-card" aria-live="polite">
+                <div class="site__media" id="site-media" hidden>
+                  <img id="site-image" alt="" width="1200" height="630" />
+                </div>
+                <div class="site__body">
+                  <div class="site__head">
+                    <span class="site__icon" id="site-icon" aria-hidden="true"></span>
+                    <div>
+                      <h2 class="site__title" id="site-title"></h2>
+                      <p class="site__host" id="site-host"></p>
+                    </div>
+                  </div>
+                  <p class="site__desc" id="site-desc" hidden></p>
+                  <p class="site__fact" id="site-fact"></p>
+                </div>
+              </article>
+
+              <ul class="notices" id="notices"></ul>
+
+              <fieldset class="choice" id="choice-scope">
+                <legend class="choice__legend">How much should we save?</legend>
+                <div class="choice__grid">
+                  <label class="tile">
+                    <input type="radio" name="scope" value="page" />
+                    <span class="tile__name">Just this page</span>
+                    <span class="tile__note">With its pictures, fonts and styles.</span>
+                  </label>
+                  <label class="tile">
+                    <input type="radio" name="scope" value="section" checked />
+                    <span class="tile__name">This section</span>
+                    <span class="tile__note" id="scope-section-note">This page and the pages under it.</span>
+                  </label>
+                  <label class="tile">
+                    <input type="radio" name="scope" value="site" />
+                    <span class="tile__name">The whole website</span>
+                    <span class="tile__note" id="scope-site-note">Every page we can reach on the site.</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="choice choice--size" id="choice-size">
+                <legend class="choice__legend">How big can it get? <span class="choice__aside" id="size-aside" hidden>Not needed for a single page.</span></legend>
+                <div class="segment">
+                  <label class="segment__item">
+                    <input type="radio" name="size" value="quick" />
+                    <span><strong>Quick look</strong> up to 25 pages</span>
+                  </label>
+                  <label class="segment__item">
+                    <input type="radio" name="size" value="normal" checked />
+                    <span><strong>Normal</strong> up to 150 pages</span>
+                  </label>
+                  <label class="segment__item">
+                    <input type="radio" name="size" value="everything" />
+                    <span><strong>Everything</strong> up to 1,000 pages</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <details class="more" id="more">
+                <summary class="more__summary">More options</summary>
+                <div class="more__body">
+                  <div class="opt opt--engine">
+                    <label class="switch">
+                      <input type="checkbox" id="opt-modern" />
+                      <span class="switch__track" aria-hidden="true"></span>
+                      <span class="switch__text">
+                        <strong>Modern site mode</strong>
+                        <span>Runs the site in a built-in browser first. Needed for sites that build their pages with code. Slower.</span>
+                      </span>
+                    </label>
+                    <p class="opt__engine" id="engine-line" hidden>
+                      <span id="engine-text">Not set up yet. It is a one-time download of about 150 MB.</span>
+                      <button class="btn btn--small" id="engine-setup" type="button">Set it up</button>
+                    </p>
+                    <div class="opt__sub" id="modern-sub">
+                      <label class="check">
+                        <input type="checkbox" id="opt-scroll" checked />
+                        <span>Scroll each page so pictures that load as you scroll are saved too</span>
+                      </label>
+                      <label class="check">
+                        <input type="checkbox" id="opt-patient" />
+                        <span>Give slow pages extra time to finish</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <label class="switch">
+                    <input type="checkbox" id="opt-gentle" />
+                    <span class="switch__track" aria-hidden="true"></span>
+                    <span class="switch__text">
+                      <strong>Go gently</strong>
+                      <span>Wait between pages. Use this if the site says you are visiting too fast.</span>
+                    </span>
+                  </label>
+
+                  <label class="switch">
+                    <input type="checkbox" id="opt-subdomains" />
+                    <span class="switch__track" aria-hidden="true"></span>
+                    <span class="switch__text">
+                      <strong>Include sub-sites</strong>
+                      <span id="subdomain-note">Also save addresses like blog.example.com and shop.example.com.</span>
+                    </span>
+                  </label>
+
+                  <label class="switch">
+                    <input type="checkbox" id="opt-robots" />
+                    <span class="switch__track" aria-hidden="true"></span>
+                    <span class="switch__text">
+                      <strong>Ignore the site&rsquo;s robot rules</strong>
+                      <span>Only for your own site, or with the owner&rsquo;s permission.</span>
+                    </span>
+                  </label>
+
+                  <div class="field">
+                    <label for="opt-sitemap">Use the site&rsquo;s own page list</label>
+                    <select id="opt-sitemap">
+                      <option value="auto" selected>Automatically, for whole websites</option>
+                      <option value="on">Always</option>
+                      <option value="off">Never</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="opt-only">Only save pages whose address contains</label>
+                    <input id="opt-only" type="text" spellcheck="false" placeholder="for example: blog, /docs/" />
+                  </div>
+
+                  <div class="field">
+                    <label for="opt-skip">Skip anything whose address contains</label>
+                    <input id="opt-skip" type="text" spellcheck="false" placeholder="for example: .pdf, /tag/" />
+                  </div>
+
+                  <div class="field-pair">
+                    <div class="field">
+                      <label for="opt-pages">Most pages</label>
+                      <input id="opt-pages" type="number" min="1" max="5000" inputmode="numeric" placeholder="Use the size above" />
+                    </div>
+                    <div class="field">
+                      <label for="opt-mb">Most space (MB)</label>
+                      <input id="opt-mb" type="number" min="10" max="20000" inputmode="numeric" placeholder="Use the size above" />
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <div class="plan__go">
+                <button class="btn btn--primary btn--big" id="save" type="button">Save this site</button>
+                <button class="btn btn--quiet" id="change" type="button">Use a different address</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- saving -->
+          <div class="pane" data-pane="saving" hidden>
+            <p class="pane__over" id="saving-over">Saving</p>
+            <h2 class="pane__title" id="saving-title">This site</h2>
+
+            <div class="meter" id="meter">
+              <div
+                class="meter__track"
+                role="progressbar"
+                id="meter-bar"
+                aria-labelledby="saving-title"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
+                <span class="meter__fill" id="meter-fill"></span>
+              </div>
+              <div class="meter__row">
+                <span class="meter__pct" id="meter-pct">0%</span>
+                <span class="meter__eta" id="meter-eta">Getting started</span>
+              </div>
+            </div>
+
+            <dl class="tally">
+              <div class="tally__item"><dt>Pages</dt><dd id="t-pages">0</dd></div>
+              <div class="tally__item"><dt>Pictures</dt><dd id="t-images">0</dd></div>
+              <div class="tally__item"><dt>Other files</dt><dd id="t-other">0</dd></div>
+              <div class="tally__item"><dt>Size</dt><dd id="t-size">0 B</dd></div>
+            </dl>
+
+            <p class="now" id="now" aria-live="off">Looking at the first page</p>
+
+            <div class="saving__actions">
+              <label class="check check--notify">
+                <input type="checkbox" id="notify" />
+                <span>Tell me when it&rsquo;s done</span>
+              </label>
+              <button class="btn btn--quiet" id="stop" type="button">Stop and keep what&rsquo;s saved</button>
+            </div>
+            <p class="saving__note">You can close this tab. sitesnap keeps going and you can come back to it.</p>
+
+            <details class="activity" id="activity-box">
+              <summary>Show what&rsquo;s happening</summary>
+              <ol class="activity__list" id="activity" aria-live="off"></ol>
+            </details>
+          </div>
+
+          <!-- done -->
+          <div class="pane" data-pane="done" hidden>
+            <p class="pane__over" id="done-over">Saved</p>
+            <h2 class="pane__title" id="done-title">Your copy is ready.</h2>
+            <p class="done__facts" id="done-facts"></p>
+
+            <div class="done__actions">
+              <button class="btn btn--primary btn--big" id="open-copy" type="button">Open it</button>
+              <a class="btn" id="zip" href="#" download>Save as a zip file</a>
+              <button class="btn" id="reveal" type="button">Show in folder</button>
+            </div>
+            <p class="done__where" id="done-where"></p>
+
+            <ul class="notes" id="notes"></ul>
+
+            <div class="done__more">
+              <button class="btn btn--quiet" id="again" type="button">Save another site</button>
+              <button class="btn btn--quiet" id="update" type="button">Check the site for changes</button>
+            </div>
+          </div>
+
+          <!-- failed -->
+          <div class="pane" data-pane="failed" hidden>
+            <div class="problem">
+              <span class="problem__mark" aria-hidden="true">!</span>
+              <h2 class="pane__title" id="fail-title">Something went wrong.</h2>
+              <p class="problem__text" id="fail-text"></p>
+              <div class="row">
+                <button class="btn btn--primary" id="fail-action" type="button" hidden></button>
+                <button class="btn btn--quiet" id="fail-back" type="button">Try a different address</button>
+              </div>
+              <details class="tech">
+                <summary>Technical details</summary>
+                <p id="fail-detail"></p>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <figure class="map" id="map-figure">
+          <canvas class="map__canvas" id="map" role="img" aria-label="A map of the site will appear here."></canvas>
+          <figcaption class="map__caption" id="map-caption">
+            <span class="map__hint" id="map-hint">The site&rsquo;s map draws itself here as it is saved.</span>
+            <span class="map__legend" id="map-legend" hidden>
+              <span><i class="key key--page" aria-hidden="true"></i>A saved page</span>
+              <span><i class="key key--ring" aria-hidden="true"></i>One level deeper in the address</span>
+            </span>
+          </figcaption>
+          <div class="map__tip" id="map-tip" hidden>
+            <strong id="map-tip-title"></strong>
+            <span id="map-tip-path"></span>
+          </div>
+        </figure>
+      </section>
+
+      <!-- ============ LIBRARY ============ -->
+      <section class="library" id="library" aria-labelledby="library-title" hidden>
+        <header class="library__head">
+          <div>
+            <h1 class="library__title" id="library-title">Your library</h1>
+            <p class="library__lede" id="library-lede">
+              Every site you save stays here, in <span id="library-path">Documents / sitesnap</span>.
+            </p>
+          </div>
+          <button class="btn" id="open-folder" type="button">Open the folder</button>
+        </header>
+        <ul class="shelf" id="shelf"></ul>
+        <div class="empty" id="library-empty" hidden>
+          <h2 class="empty__title">Nothing saved yet.</h2>
+          <p>Sites you save show up here, so you can open them any time, even offline.</p>
+          <a class="btn btn--primary" href="#/">Save your first site</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Ft5 statement -->
+    <footer class="foot">
+      <p class="foot__statement">Runs on this computer. Nothing you save is uploaded.</p>
+      <p class="foot__small">Only save sites you have the right to copy.</p>
+    </footer>
+
+    <!-- viewer -->
+    <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+      <header class="viewer__bar">
+        <span class="viewer__icon" id="viewer-icon" aria-hidden="true"></span>
+        <div class="viewer__heading">
+          <h2 class="viewer__title" id="viewer-title"></h2>
+          <p class="viewer__page" id="viewer-page"></p>
+        </div>
+        <button class="btn btn--small viewer__pages-toggle" id="viewer-pages-toggle" type="button" aria-expanded="false" aria-controls="viewer-pages">Pages</button>
+        <a class="btn btn--small" id="viewer-tab" href="#" target="_blank" rel="noopener">Open in a new tab</a>
+        <button class="btn btn--small btn--primary" id="viewer-close" type="button">Close</button>
+      </header>
+      <div class="viewer__body">
+        <nav class="viewer__pages" id="viewer-pages" aria-label="Saved pages">
+          <label class="visually-hidden" for="viewer-search">Find a page</label>
+          <input class="viewer__search" id="viewer-search" type="search" placeholder="Find a page" />
+          <ul class="viewer__list" id="viewer-list"></ul>
+        </nav>
+        <iframe
+          class="viewer__frame"
+          id="viewer-frame"
+          title="Saved copy of the site"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads"
+        ></iframe>
+      </div>
+    </dialog>
+
+    <!-- sign in -->
+    <dialog class="sheet" id="login-sheet" aria-labelledby="login-title">
+      <h2 class="sheet__title" id="login-title">Sign in first</h2>
+      <p class="sheet__text" id="login-text"></p>
+      <div class="row sheet__actions">
+        <button class="btn btn--primary" id="login-go" type="button">Open a sign-in window</button>
+        <button class="btn btn--quiet" id="login-close" type="button">Cancel</button>
+      </div>
+    </dialog>
+
+    <!-- modern site mode -->
+    <dialog class="sheet" id="engine-sheet" aria-labelledby="engine-title">
+      <h2 class="sheet__title" id="engine-title">Set up modern site mode</h2>
+      <p class="sheet__text" id="engine-sheet-text">
+        Some websites build their pages with code after they load. To save those properly, sitesnap
+        uses a built-in browser. It is a one-time download of about 150 MB.
+      </p>
+      <div class="meter meter--sheet" id="engine-meter" hidden>
+        <div class="meter__track" role="progressbar" id="engine-bar" aria-labelledby="engine-title" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span class="meter__fill" id="engine-fill"></span>
+        </div>
+        <div class="meter__row"><span id="engine-step">Starting</span><span id="engine-pct"></span></div>
+      </div>
+      <div class="row sheet__actions">
+        <button class="btn btn--primary" id="engine-go" type="button">Download and set up</button>
+        <button class="btn btn--quiet" id="engine-close" type="button">Not now</button>
+      </div>
+    </dialog>
+
+    <!-- confirm -->
+    <dialog class="sheet" id="confirm-sheet" aria-labelledby="confirm-title">
+      <h2 class="sheet__title" id="confirm-title"></h2>
+      <p class="sheet__text" id="confirm-text"></p>
+      <div class="row sheet__actions">
+        <button class="btn btn--danger" id="confirm-yes" type="button"></button>
+        <button class="btn btn--quiet" id="confirm-no" type="button">Keep it</button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <p class="visually-hidden" id="status" role="status" aria-live="polite"></p>
+
+    <noscript>
+      <p class="noscript">sitesnap needs JavaScript switched on to work.</p>
+    </noscript>
+
+    <script src="map.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

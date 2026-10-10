@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="description" content="Save any website to your computer so it opens without the internet. Free to use." />
+    <title>sitesnap, free website saver</title>
+    <link rel="preload" href="fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="gate.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  </head>
+  <body>
+    <main class="gate">
+      <a class="gate__brand" href="/" aria-label="sitesnap">
+        <svg class="gate__mark" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M26.00 128.00a102.0 102.0 0 1 1 204.0 0a102.0 102.0 0 1 1 -204.0 0zM54.00 128.00a74.0 74.0 0 1 0 148.0 0a74.0 74.0 0 1 0 -148.0 0z M164.41 71.43a31 31 0 1 1 62 0a31 31 0 1 1 -62 0zM94.00 128.00a34 34 0 1 1 68 0a34 34 0 1 1 -68 0z" /></svg>
+        sitesnap
+      </a>
+
+      <div>
+        <h1 class="gate__title">Save any website. Free.</h1>
+        <p class="gate__lede">Type an address and get a copy that opens without the internet. No account, no password. Just your email to come in.</p>
+      </div>
+
+      <form class="gate__form" id="gate-form" method="post" action="/api/gate" novalidate>
+        <label class="gate__label" for="email">Your email</label>
+        <div class="gate__row">
+          <input class="gate__input" id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="gate-error" />
+          <button class="gate__button" id="go" type="submit">Open sitesnap</button>
+        </div>
+        <p class="gate__error" id="gate-error" role="alert"></p>
+      </form>
+
+      <section class="gate__notes" aria-label="About your email">
+        <p><strong>What we do with it.</strong> We use it to let you in and to send you the odd note about sitesnap. We do not sell it or share it. Reply to any note to be removed.</p>
+        <p><strong>Good to know.</strong> <span id="limits">Saves on this free page are small and are deleted soon after they finish, so download what you want to keep.</span> Your email is not checked by sending you a message.</p>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        var form = document.getElementById('gate-form');
+        var input = document.getElementById('email');
+        var button = document.getElementById('go');
+        var error = document.getElementById('gate-error');
+
+        fetch('/api/limits')
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (l) {
+            if (!l) return;
+            document.getElementById('limits').textContent =
+              'Each save is up to ' + l.maxPages + ' pages or ' + l.maxMb + ' MB, and is deleted ' + l.keepMinutes +
+              ' minutes after it finishes, so download what you want to keep.';
+          })
+          .catch(function () {});
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          error.textContent = '';
+          input.removeAttribute('aria-invalid');
+          button.disabled = true;
+          fetch('/api/gate', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email: input.value }),
+          })
+            .then(function (r) {
+              return r.json().then(function (body) { return { ok: r.ok, body: body }; });
+            })
+            .then(function (res) {
+              if (res.ok) {
+                location.replace('/');
+                return;
+              }
+              error.textContent = res.body.error || 'Something went wrong. Please try again.';
+              input.setAttribute('aria-invalid', 'true');
+              input.focus();
+              button.disabled = false;
+            })
+            .catch(function () {
+              error.textContent = 'We could not reach the server. Check your connection and try again.';
+              button.disabled = false;
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>

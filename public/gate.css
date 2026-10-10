@@ -1,0 +1,198 @@
+/* tastemark · extension of sitesnap · macrostructure: single-column gate (component scope)
+ * genre: modern-minimal · theme: night chart (tokens.css, unchanged) · dials V3 M3 D2
+ * nav: none · footer: none · signature: none (one load reveal) · sources: hand-written
+ * critique: P4 H4 E4 S4 R5 V3 */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  background: var(--color-paper);
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  overflow-x: clip;
+  display: grid;
+  place-items: center;
+  padding: var(--space-xl) var(--space-md);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+.gate {
+  width: min(100%, 30rem);
+  min-width: 0;
+}
+
+.gate > * {
+  animation: gate-in var(--dur-slow) var(--ease-out) both;
+}
+.gate > :nth-child(2) { animation-delay: 70ms; }
+.gate > :nth-child(3) { animation-delay: 140ms; }
+.gate > :nth-child(4) { animation-delay: 210ms; }
+
+@keyframes gate-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.gate__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: var(--text-md);
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.gate__mark {
+  width: 1.9rem;
+  height: 1.9rem;
+  color: var(--color-accent);
+}
+
+.gate__title {
+  margin: var(--space-xl) 0 var(--space-sm);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-display);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.gate__lede {
+  margin: 0 0 var(--space-xl);
+  color: var(--color-ink-2);
+  max-width: 34ch;
+}
+
+.gate__form {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.gate__label {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.gate__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-xs);
+}
+
+@media (max-width: 30rem) {
+  .gate__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.gate__input {
+  min-width: 0;
+  min-height: 3.25rem;
+  padding: 0 var(--space-md);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-paper-inset);
+  color: var(--color-ink);
+  font: inherit;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.gate__input::placeholder {
+  color: var(--color-ink-3);
+}
+
+.gate__input:hover {
+  border-color: var(--color-ink-3);
+}
+
+.gate__input[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+.gate__button {
+  min-height: 3.25rem;
+  padding: 0 var(--space-lg);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font: inherit;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.gate__button:hover {
+  background: var(--color-accent-strong);
+}
+
+.gate__button:active {
+  transform: translateY(1px);
+}
+
+.gate__button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.gate :focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.gate__error {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+}
+
+.gate__notes {
+  margin: var(--space-xl) 0 0;
+  padding: var(--space-md) 0 0;
+  border-top: 1px solid var(--color-rule);
+  display: grid;
+  gap: var(--space-xs);
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+}
+
+.gate__notes p {
+  margin: 0;
+}
+
+.gate__notes strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gate > * {
+    animation: none;
+  }
+  .gate__button,
+  .gate__input {
+    transition: none;
+  }
+}

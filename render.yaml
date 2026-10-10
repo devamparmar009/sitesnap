@@ -1,0 +1,19 @@
+# One-click deploy to Render's free plan.
+# Free services sleep after about 15 minutes without a visitor and wake in
+# under a minute. Their disk is wiped on every restart, so set
+# SITESNAP_EMAIL_WEBHOOK (see DEPLOY.md) to keep the email list somewhere safe.
+services:
+  - type: web
+    name: sitesnap
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: SITESNAP_SECRET
+        generateValue: true
+      - key: SITESNAP_ADMIN_KEY
+        generateValue: true
+      - key: SITESNAP_EMAIL_WEBHOOK
+        sync: false
+      - key: SITESNAP_CONTACT
+        sync: false
