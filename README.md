@@ -1,12 +1,71 @@
+<div align="center">
+
+<img src="public/favicon.svg" width="76" alt="sitesnap logo" />
+
 # sitesnap
 
-Download a complete website for offline viewing — every page, stylesheet,
-script, image and font, with all the links rewritten to point at local files.
+**Save any website to your computer, so it opens without the internet.**
 
-Runs entirely on your machine. There is an app for everyone and a CLI for
-developers.
+A plain-language app for everyone, and a safe, shell-free crawler and CLI for developers.
+
+</div>
+
+<p align="center">
+  <img src="docs/images/start.webp" alt="The sitesnap start screen: a bright sky with a headline and a box to paste a website address" width="900" />
+</p>
+
+## What it looks like
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/plan.webp" alt="Choosing how much of the site to save" />
+      <p align="center"><b>1. Paste an address and choose how much.</b><br />Just the page, a section, or the whole site.</p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/saving.webp" alt="A live map of the site filling in as pages are saved" />
+      <p align="center"><b>2. Watch the map fill in.</b><br />Every dot is a page, saved as it arrives.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/done.webp" alt="The finished copy with buttons to open it, save a zip, or show it in a folder" />
+      <p align="center"><b>3. Open it, zip it, or keep it.</b><br />The copy works with the internet unplugged.</p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/library.webp" alt="The library of saved sites shown as cards" />
+      <p align="center"><b>4. Everything you saved, in one library.</b><br />Open, zip, update or delete each copy.</p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="68%" valign="top">
+      <img src="docs/images/gate.webp" alt="The free hosted page, which asks for an email address before opening the tool" />
+      <p align="center"><b>The free hosted page</b><br />An optional email gate, small limits, and private saves for each visitor.</p>
+    </td>
+    <td width="32%" valign="top">
+      <img src="docs/images/mobile.webp" alt="The start screen on a phone" />
+      <p align="center"><b>Works on a phone</b></p>
+    </td>
+  </tr>
+</table>
+
+## At a glance
+
+- **No jargon.** Paste an address, answer two questions, press save.
+- **A copy that really works offline.** Pages, stylesheets, scripts, images and fonts are saved, and every link is rewritten to point at the local files.
+- **Runs on your own computer.** What you save is never uploaded.
+- **Plain-English problems.** If a site blocks you or asks you to sign in, the app says so and suggests what to do.
+- **A library, with updates.** Saved sites stay in a folder you can find, and "check the site for changes" re-saves only what moved.
+- **Safe by design.** The crawler has no shell and no `wget`, and the app only takes commands from its own page.
+- **For developers too.** A CLI, resume after a crash, and an optional browser engine for sites that build their pages with code.
+
+## Quick start
 
 ```bash
+npm install
 npm run app                 # opens the app in your browser
 node bin/cli.js https://example.com --zip
 ```
