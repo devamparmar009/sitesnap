@@ -751,8 +751,6 @@ output, just slowly or unboundedly, so only a measuring test catches them.
 
 ## Free hosted page
 
-**Try it now, free: https://sitesnap-gcif.onrender.com**
-
 There is a hosted mode (`SITESNAP_HOSTED=1`) that puts an email gate in front of
 the tool, keeps each visitor's saves private, and applies small limits. It is
 how a free public page can be run from this repository.
