@@ -6,8 +6,10 @@ not sign in. They type an email address once, then the tool opens.
 ## 1. Deploy
 
 1. Create a free account at [render.com](https://render.com).
-2. Press **Deploy to Render** in the [README](README.md), or in Render choose
-   **New, Blueprint** and pick this repository. `render.yaml` does the rest.
+2. Press the button below, or in Render choose **New, Blueprint** and pick
+   this repository. `render.yaml` does the rest.
+
+   [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/devamparmar009/sitesnap)
 3. Wait for the build (a few minutes). Render gives you an address like
    `https://sitesnap-xxxx.onrender.com`. That is your live link.
 
