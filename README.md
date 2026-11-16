@@ -14,6 +14,18 @@ A plain-language app for everyone, and a safe, shell-free crawler and CLI for de
   <img src="docs/images/start.webp" alt="The sitesnap start screen: a bright sky with a headline and a box to paste a website address" width="900" />
 </p>
 
+## Watch it work
+
+<p align="center">
+  <a href="docs/media/sitesnap-launch.mp4"><img src="docs/media/sitesnap-launch.jpg" alt="Play the 24-second sitesnap video: a site is saved, its map fills in, and the copy is ready to open offline" width="900" /></a>
+</p>
+
+<p align="center">
+  <b><a href="docs/media/sitesnap-launch.mp4">Play the 24-second video</a></b><br />
+  Paste an address, choose how much to save, watch the map fill in, then open the copy with the internet unplugged.<br />
+  <sub>Music: Sascha Ende, ende.app (CC BY 4.0)</sub>
+</p>
+
 ## What it looks like
 
 <table>
