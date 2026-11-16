@@ -62,7 +62,7 @@ sitesnap makes a copy of a website on your own computer: its pages, pictures, fo
 
 ## Install it
 
-You need a Mac and about five minutes. You type two commands once; after that it's all buttons.
+Works on **Mac, Windows and Linux**. You need about five minutes. You type two commands once; after that it's all buttons.
 
 **1. Install Node.js.** Go to [nodejs.org](https://nodejs.org), download the version marked **LTS**, and run the installer. (sitesnap needs version 18 or newer.)
 
@@ -72,7 +72,11 @@ You need a Mac and about five minutes. You type two commands once; after that it
 git clone https://github.com/devamparmar009/sitesnap
 ```
 
-**3. Open a Terminal in that folder.** Open the **Terminal** app, type `cd ` (with a space after it), drag the sitesnap folder into the window, and press Return.
+**3. Open a Terminal in that folder.**
+
+- **Mac:** open the **Terminal** app, type `cd ` (with a space after it), drag the sitesnap folder into the window, and press Return.
+- **Windows:** right-click the sitesnap folder and choose **Open in Terminal**.
+- **Linux:** right-click inside the folder and choose **Open in Terminal**.
 
 **4. Set it up, then start it.**
 
@@ -86,9 +90,9 @@ npm run app
 
 Your browser opens on sitesnap. Next time, you only need step 3 and `npm run app`. To close it, press **Quit** on the page.
 
-> Want a double-click app instead? Run `npm run build:app` once. It makes `dist/sitesnap.app`, which you can keep in Applications. On another Mac, open it the first time with right-click, then **Open**.
+> Want a double-click app instead? Run `npm run build:app` once. On a Mac it makes `dist/sitesnap.app`, which you can keep in Applications (on another Mac, open it the first time with right-click, then **Open**). On Linux it makes a single `dist/sitesnap` program. The double-click app can't be built on Windows yet; use `npm run app` there.
 
-sitesnap is made and tested on a Mac. Windows and Linux are not tested yet.
+Every change to sitesnap is tested automatically on Mac, Windows and Linux.
 
 ## What it can save
 

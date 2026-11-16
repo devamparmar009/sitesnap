@@ -35,7 +35,7 @@ sitesnap saves a whole website onto your computer: its pages, pictures, fonts an
 | | |
 | --- | --- |
 | **What you get** | A folder with the site's pages, pictures, fonts and styles, and a zip file of the same. |
-| **What you need** | Node.js 18 or newer (free, from [nodejs.org](https://nodejs.org)) and an internet connection while saving. No account. Once built, the double-click Mac app needs nothing else. |
+| **What you need** | Node.js 18 or newer (free, from [nodejs.org](https://nodejs.org)) and an internet connection while saving. No account. Runs on Mac, Windows and Linux. Once built, the double-click app (Mac or Linux) needs nothing else. |
 | **Where it lives** | In `Documents / sitesnap` on your computer. Nothing you save is uploaded. |
 | **What it costs** | Nothing to run. No fees and no subscription. |
 | **What it is not** | A backup you can restore a website from, or a licence to copy things you have no right to copy. |
@@ -100,7 +100,7 @@ Each feature gets a sentence in plain words, and a small line on how it works.
   <br /><sub>How: Limits apply per file and per request as well, and a request that stalls is dropped.</sub>
 - **More options.** Sub-sites, the site's own page list, robot rules, words to include or skip, and your own page and space limits, all in plain language.
   <br /><sub>How: These are the same controls developers use on the command line.</sub>
-- **The double-click app.** A Mac app you open like any other. There is nothing else to install, and the page has a Quit button.
+- **The double-click app.** A Mac or Linux app you open like any other. There is nothing else to install, and the page has a Quit button. On Windows, use `npm run app` for now.
   <br /><sub>How: It is a packaged copy of the Node.js runtime with sitesnap inside. On another Mac the first launch needs a right-click and Open, because Apple has not approved it.</sub>
 - **A command line for developers.** Every option is also a command, for scripts and scheduled jobs.
   <br /><sub>How: For example: `node bin/cli.js https://example.com --zip`.</sub>
@@ -251,14 +251,14 @@ Know these before you promise anyone anything.
 - **Parts from other services may not work.** Embedded maps, videos from other services and chat widgets can still call the live internet, so they may not show offline.
 - **Very large sites are capped.** The three sizes stop at 1,000 pages. Under More options the limit goes to 5,000.
 - **It is not certified evidence.** A saved copy is dated by its folder name and nothing is signed or sealed. Regulated firms and courts expect a signed timestamp and a tamper seal.
-- **The app is for Mac so far.** Windows is not tested yet. On another Mac, the first launch needs a right-click and Open.
+- **No double-click app for Windows yet.** sitesnap itself runs on Mac, Windows and Linux, and its tests pass on all three. On Windows you start it with `npm run app`. On another Mac, the double-click app's first launch needs a right-click and Open.
 - **Modern site mode costs time and space.** It needs a one-time download of about 150 MB and each page takes longer.
 
 ## 7. The command line
 
 ### Install
 
-Node 18+ (uses built-in `fetch`). Tested on Node 22.
+Node 18+ (uses built-in `fetch`). Tested on the current Node LTS on macOS, Windows and Ubuntu.
 
 ```bash
 npm install
@@ -841,7 +841,9 @@ Honest about what it doesn't do.
 npm test
 ```
 
-231 tests, in eleven groups:
+231 tests, in eleven groups. GitHub runs all of them on fresh macOS, Windows and
+Ubuntu machines on every pull request and every change to `main`
+(`.github/workflows/test.yml`), and they pass on all three.
 
 - **`urlpath.test.js`** — the security core. This module decides where
   attacker-influenced input lands on your filesystem: traversal, encoded
