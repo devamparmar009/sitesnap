@@ -62,6 +62,56 @@ A plain-language app for everyone, and a safe, shell-free crawler and CLI for de
 - **Safe by design.** The crawler has no shell and no `wget`, and the app only takes commands from its own page.
 - **For developers too.** A CLI, resume after a crash, and an optional browser engine for sites that build their pages with code.
 
+## What it can save
+
+sitesnap saves most ordinary public websites as they are. Sites that build their pages in the browser need one extra setting, pages behind a login need you to sign in first, and sites behind a bot-protection screen stay blocked.
+
+### Works out of the box
+
+Sites where the server sends the whole page:
+
+- **Blogs, portfolios, small-business sites and landing pages.**
+- **WordPress and most other CMS sites.**
+- **Documentation sites and wikis.** Save one section by starting at, say, `/docs/` and choosing "This section".
+- **News and article pages.**
+- **Sites with a sitemap.** sitesnap uses it to find pages that nothing links to.
+- **Older and non-English sites** in other text encodings (Shift_JIS, windows-1252). They are converted so the copy is not garbled.
+- **Sites that redirect** (`example.com` to `www.example.com`, or to a country version). The save follows to wherever the address lands.
+- **Sites with 3D models and WebGL.** Model and texture files (`.glb`, `.gltf`, `.bin`, `.hdr`, `.ktx2` and more) are saved with the page.
+- **Your own local dev server**, such as `http://localhost:3000`.
+- **Sites that turn away unfamiliar browsers.** sitesnap tries again as Chrome, then Firefox, then Safari.
+
+### Needs "Modern site mode"
+
+Turn it on under **More options** (CLI: `--render`). It is a one-time download of about 150 MB, and saving is slower.
+
+- **Apps that build their pages in the browser** with React, Vue, Angular and similar. Without this mode you get an empty shell.
+- **Pages whose pictures load as you scroll.** Keep "Scroll each page" ticked (CLI: `--scroll`).
+- **Slow pages.** Tick "Give slow pages extra time to finish" (CLI: `--settle 4000`).
+
+See [JavaScript-rendered sites](#javascript-rendered-sites).
+
+### Needs you to sign in
+
+- **Members areas, account pages and private docs.** In the app, **Sign in first** opens a real browser window and you sign in there; sitesnap never sees the password. It borrows that session for one download and sends it to that site only. The CLI takes `--cookie` or `-H` instead.
+
+### Saved, but partly live or limited
+
+- **Features that ask the live server while you browse**, such as server-side search, contact forms, comments, live feeds and chat. The copy is files, not the server, so these do not work offline.
+- **Some advanced app code.** Files loaded by background workers, some WebAssembly and `importScripts` still come from the live site. See [Limits](#limits).
+- **Very large sites.** The app's sizes go up to 1,000 pages ("Everything"), and **More options → Most pages** raises that to 5,000. The CLI defaults to 200 pages and 500 MB, both adjustable.
+- **Sub-sites** such as `blog.example.com` are skipped unless you switch on **Include sub-sites** (CLI: `--subdomains`).
+
+### Won't save
+
+- **Sites behind a bot-protection challenge** (a "checking your browser" screen). sitesnap names the block and stops. It does not solve CAPTCHAs or try to get around the check.
+- **Pages the site's robots.txt asks tools to avoid.** **Ignore the site's robot rules** (CLI: `--ignore-robots`) turns this off; use it only on your own site or with the owner's permission.
+- **Private or internal network addresses on the hosted page.** The hosted page always blocks them and always obeys robots.txt, and it saves at most 60 pages by default.
+
+### Whose sites you can save
+
+Only save sites you have the right to copy. The site's terms of service and copyright still apply. Safe choices are your own sites, sites whose owner has said yes, openly licensed documentation, and practice sites built for this, such as [books.toscrape.com](https://books.toscrape.com).
+
 ## Quick start
 
 ```bash
