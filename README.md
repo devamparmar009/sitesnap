@@ -15,7 +15,7 @@ No account, no coding, nothing uploaded.
 
 ## Watch the 2-minute tour
 
-VIDEO_URL
+https://github.com/user-attachments/assets/4715b2e3-3d55-4091-8ff0-330917f3acfc
 
 <p align="center"><sub>Every feature in 2 minutes 29 seconds. Music: Sascha Ende, ende.app (CC BY 4.0).</sub></p>
 
