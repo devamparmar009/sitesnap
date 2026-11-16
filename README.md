@@ -17,7 +17,7 @@ No account, no coding, nothing uploaded.
 
 https://github.com/user-attachments/assets/4715b2e3-3d55-4091-8ff0-330917f3acfc
 
-<p align="center"><sub>Every feature in 2 minutes 29 seconds. Music: Sascha Ende, ende.app (CC BY 4.0).</sub></p>
+<p align="center"><sub>How to pitch a client a better version of their own site, then every feature, in 2 minutes 39 seconds. Music: Sascha Ende, ende.app (CC BY 4.0).</sub></p>
 
 ## What it does
 
