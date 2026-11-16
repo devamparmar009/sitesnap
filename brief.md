@@ -897,4 +897,4 @@ sitesnap is built to run on your own computer. The code also has a hosted mode (
 of service and copyright still apply to whatever you point this at. Mirror what
 you have the right to mirror.
 
-**Licence.** Source-available, all rights reserved. You can read the code and run it for your own personal use. Copying, changing, hosting it for others, and selling it need written permission. See [LICENSE](LICENSE).
+**Licence.** Source-available, all rights reserved. You can read the code and run sitesnap on your own computer for your own projects and for client work, paid or not, such as saving a prospective client's site so you can redesign it for them. Copying or changing the code, hosting it for others, and selling it need written permission. See [LICENSE](LICENSE).
