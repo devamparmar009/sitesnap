@@ -16,14 +16,11 @@ A plain-language app for everyone, and a safe, shell-free crawler and CLI for de
 
 ## Watch it work
 
-<p align="center">
-  <a href="docs/media/sitesnap-launch.mp4"><img src="docs/media/sitesnap-launch.jpg" alt="Play the 24-second sitesnap video: a site is saved, its map fills in, and the copy is ready to open offline" width="900" /></a>
-</p>
+https://github.com/user-attachments/assets/e5a7c821-af77-4744-bab2-b639afab83c7
 
 <p align="center">
-  <b><a href="docs/media/sitesnap-launch.mp4">Play the 24-second video</a></b><br />
-  Paste an address, choose how much to save, watch the map fill in, then open the copy with the internet unplugged.<br />
-  <sub>Music: Sascha Ende, ende.app (CC BY 4.0)</sub>
+  24 seconds: paste an address, choose how much to save, watch the map fill in, then open the copy with the internet unplugged.<br />
+  <sub>Music: Sascha Ende, ende.app (CC BY 4.0). The video is also in the repo at <a href="docs/media/sitesnap-launch.mp4"><code>docs/media/sitesnap-launch.mp4</code></a>.</sub>
 </p>
 
 ## What it looks like
