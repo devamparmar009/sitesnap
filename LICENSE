@@ -3,11 +3,16 @@ Sitesnap Source-Available Licence
 Copyright (c) 2026 Devam Parmar (devamparmar009). All rights reserved.
 
 The source code in this repository is published so that people can read it,
-learn from it, and run it for their own personal, non-commercial use.
+learn from it, and use sitesnap in their own work, including paid work for
+their clients.
 
 You MAY:
   - read and study the code;
-  - run an unmodified copy on your own computer for personal use;
+  - run an unmodified copy on your own computer;
+  - use it for your own projects, and for work you do for clients, paid or
+    unpaid. For example: saving a client's or prospective client's website so
+    you can study it, redesign it, rebuild it or archive it for them, and
+    handing them what you made;
   - use the free hosted page, if one is published, under its own limits.
 
 You MAY NOT, without written permission from the copyright holder:
@@ -16,8 +21,13 @@ You MAY NOT, without written permission from the copyright holder:
   - sell it, sublicense it, or include it in a product or service;
   - remove this notice.
 
+Running sitesnap yourself as part of your client work is allowed, and it does
+not count as including it in a product or service. What you may not do is
+hand the tool itself to others, or offer it to others as a service.
+
 The software is provided "as is", without warranty of any kind. The copyright
 holder is not liable for any claim or damage arising from its use. You are
-responsible for having the right to copy any website you point it at.
+responsible for having the right to copy any website you point it at, and for
+how you use what you save.
 
 For other uses, ask the copyright holder first.

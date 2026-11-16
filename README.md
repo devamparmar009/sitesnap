@@ -116,4 +116,4 @@ Everything else is in **[brief.md](brief.md)**: every feature in plain words, th
 
 ## Licence
 
-Free to read and to run on your own computer for personal use. Copying, changing, hosting it for other people or selling it needs written permission. See [LICENSE](LICENSE).
+Free to read, and free to run on your own computer for your own projects and for client work, paid or not. Copying or changing the code, hosting it for other people, or selling it needs written permission. See [LICENSE](LICENSE).
